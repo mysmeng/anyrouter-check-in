@@ -1,4 +1,4 @@
-name: AnyRouter 自动签到
+name: AgentRouter 自动签到
 on:
   schedule:
     - cron: '0 */6 * * *'
@@ -64,14 +64,14 @@ jobs:
     - name: 恢复余额历史缓存
       uses: actions/cache@v4
       with:
-        path: balance_hash.txt
-        key: balance-hash-${{ github.sha }}
+        path: agentrouter_balance_hash.txt
+        key: agentrouter-balance-hash-${{ github.sha }}
         restore-keys: |
-          balance-hash-
+          agentrouter-balance-hash-
 
     - name: 执行签到
       env:
-        ANYROUTER_ACCOUNTS: ${{ secrets.ANYROUTER_ACCOUNTS }}
+        AGENTROUTER_ACCOUNTS: ${{ secrets.AGENTROUTER_ACCOUNTS }}
         DINGDING_WEBHOOK: ${{ secrets.DINGDING_WEBHOOK }}
         EMAIL_USER: ${{ secrets.EMAIL_USER }}
         EMAIL_PASS: ${{ secrets.EMAIL_PASS }}

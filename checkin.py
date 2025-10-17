@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AnyRouter.top 自动签到脚本
+AgentRouter.org 自动签到脚本
 """
 
 import asyncio
@@ -18,14 +18,14 @@ from notify import notify
 
 load_dotenv()
 
-BALANCE_HASH_FILE = 'balance_hash.txt'
+BALANCE_HASH_FILE = 'agentrouter_balance_hash.txt'
 
 
 def load_accounts():
 	"""从环境变量加载多账号配置"""
-	accounts_str = os.getenv('ANYROUTER_ACCOUNTS')
+	accounts_str = os.getenv('AGENTROUTER_ACCOUNTS')
 	if not accounts_str:
-		print('ERROR: ANYROUTER_ACCOUNTS environment variable not found')
+		print('ERROR: AGENTROUTER_ACCOUNTS environment variable not found')
 		return None
 
 	try:
@@ -129,7 +129,7 @@ async def get_waf_cookies_with_playwright(account_name: str):
 			try:
 				print(f'[PROCESSING] {account_name}: Step 1: Access login page to get initial cookies...')
 
-				await page.goto('https://anyrouter.top/login', wait_until='networkidle')
+				await page.goto('https://agentrouter.org/login', wait_until='networkidle')
 
 				try:
 					await page.wait_for_function('document.readyState === "complete"', timeout=5000)
@@ -170,7 +170,7 @@ async def get_waf_cookies_with_playwright(account_name: str):
 def get_user_info(client, headers):
 	"""获取用户信息"""
 	try:
-		response = client.get('https://anyrouter.top/api/user/self', headers=headers, timeout=30)
+		response = client.get('https://agentrouter.org/api/user/self', headers=headers, timeout=30)
 
 		if response.status_code == 200:
 			data = response.json()
@@ -227,8 +227,8 @@ async def check_in_account(account_info, account_index):
 			'Accept': 'application/json, text/plain, */*',
 			'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
 			'Accept-Encoding': 'gzip, deflate, br, zstd',
-			'Referer': 'https://anyrouter.top/console',
-			'Origin': 'https://anyrouter.top',
+			'Referer': 'https://agentrouter.org/console',
+			'Origin': 'https://agentrouter.org',
 			'Connection': 'keep-alive',
 			'Sec-Fetch-Dest': 'empty',
 			'Sec-Fetch-Mode': 'cors',
@@ -248,7 +248,7 @@ async def check_in_account(account_info, account_index):
 		checkin_headers = headers.copy()
 		checkin_headers.update({'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest'})
 
-		response = client.post('https://anyrouter.top/api/user/sign_in', headers=checkin_headers, timeout=30)
+		response = client.post('https://agentrouter.org/api/user/sign_in', headers=checkin_headers, timeout=30)
 
 		print(f'[RESPONSE] {account_name}: Response status code {response.status_code}')
 
@@ -283,7 +283,7 @@ async def check_in_account(account_info, account_index):
 
 async def main():
 	"""主函数"""
-	print('[SYSTEM] AnyRouter.top multi-account auto check-in script started (using Playwright)')
+	print('[SYSTEM] AgentRouter.org multi-account auto check-in script started (using Playwright)')
 	print(f'[TIME] Execution time: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
 
 	# 加载账号配置
@@ -398,7 +398,7 @@ async def main():
 		notify_content = '\n\n'.join([time_info, '\n'.join(notification_content), '\n'.join(summary)])
 
 		print(notify_content)
-		notify.push_message('AnyRouter Check-in Alert', notify_content, msg_type='text')
+		notify.push_message('AgentRouter Check-in Alert', notify_content, msg_type='text')
 		print('[NOTIFY] Notification sent due to failures or balance changes')
 	else:
 		print('[INFO] All accounts successful and no balance changes detected, notification skipped')

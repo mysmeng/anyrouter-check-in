@@ -1,10 +1,10 @@
-# Any Router 多账号自动签到
+# Agent Router 多账号自动签到
 
 推荐搭配使用[Auo](https://github.com/millylee/auo)，支持任意 Claude Code Token 切换的工具。
 
 **维护开源不易，如果本项目帮助到了你，请帮忙点个 Star，谢谢!**
 
-用于 Claude Code 中转站 Any Router 多账号每日签到，一次 $25，限时注册即送 100 美金，[点击这里注册](https://anyrouter.top/register?aff=gSsN)。业界良心，支持 Claude Sonnet 4.5、GPT-5-Codex、Claude Code 百万上下文（使用 `/model sonnet[1m]` 开启），`gemini-2.5-pro` 模型。
+用于 Claude Code 中转站 Agent Router 多账号每日签到，使用与 AnyRouter 相同的 API 结构。访问 [agentrouter.org](https://agentrouter.org) 注册账号。
 
 ## 功能特性
 
@@ -25,7 +25,7 @@
 2. **API User**: 用于请求头的 new-api-user 参数
 
 #### 获取 Cookies：
-1. 打开浏览器，访问 https://anyrouter.top/
+1. 打开浏览器，访问 https://agentrouter.org/
 2. 登录你的账户
 3. 打开开发者工具 (F12)
 4. 切换到 "Application" 或 "存储" 选项卡
@@ -42,7 +42,7 @@
 3. 新建一个名为 `production` 的环境
 4. 点击新建的 `production` 环境进入环境配置页
 5. 点击 "Add environment secret" 创建 secret：
-   - Name: `ANYROUTER_ACCOUNTS`
+   - Name: `AGENTROUTER_ACCOUNTS`
    - Value: 你的多账号配置数据
 
 ### 4. 多账号配置格式
@@ -89,14 +89,14 @@
 
 1. 在你的仓库中，点击 "Actions" 选项卡
 2. 如果提示启用 Actions，请点击启用
-3. 找到 "AnyRouter 自动签到" workflow
+3. 找到 "AgentRouter 自动签到" workflow
 4. 点击 "Enable workflow"
 
 ### 6. 测试运行
 
 你可以手动触发一次签到来测试：
 
-1. 在 "Actions" 选项卡中，点击 "AnyRouter 自动签到"
+1. 在 "Actions" 选项卡中，点击 "AgentRouter 自动签到"
 2. 点击 "Run workflow" 按钮
 3. 确认运行
 
@@ -104,7 +104,7 @@
 
 ## 执行时间
 
-- 脚本每6小时执行一次（1. action 无法准确触发，基本延时 1~1.5h；2. 目前观测到 anyrouter 的签到是每 24h 而不是零点就可签到）
+- 脚本每6小时执行一次（1. action 无法准确触发，基本延时 1~1.5h；2. 目前观测到签到是每 24h 而不是零点就可签到）
 - 你也可以随时手动触发签到
 
 ## 注意事项
@@ -138,7 +138,7 @@
 
 ## 开启通知
 
-脚本支持多种通知方式，可以通过配置以下环境变量开启，如果 `webhook` 有要求安全设置，例如钉钉，可以在新建机器人时选择自定义关键词，填写 `AnyRouter`。
+脚本支持多种通知方式，可以通过配置以下环境变量开启。如果 `webhook` 有要求安全设置，例如钉钉，可以在新建机器人时选择自定义关键词，填写 `AgentRouter`。
 
 ### 邮箱通知
 - `EMAIL_USER`: 发件人邮箱地址
